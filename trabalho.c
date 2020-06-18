@@ -95,7 +95,7 @@ double homomorphic_sc1()
     // }
     // print(U_dec,n_nodes);
     // return 0;
-    arq = fopen("./out/out_sc2.txt","w");
+    arq = fopen("./out/out_sc1.txt","w");
 
     // Escrevendo no arquivo a condição inicial não criptografada
 
@@ -278,7 +278,7 @@ double homomorphic_sc2() {
 
     // print(U_dec,n_nodes);
 
-    arq = fopen("./out/out_sc1.txt","w");
+    arq = fopen("./out/out_sc2.txt","w");
 
     // Escrevendo no arquivo a condição inicial não criptografada
 
