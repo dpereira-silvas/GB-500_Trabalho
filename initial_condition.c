@@ -12,16 +12,16 @@ int main(int argc, char **argv)
     FILE *arq;
 
     mpz_t n;
-    mpz_t n2;
+    // mpz_t n2;
     mpz_t g;
-    mpz_t lambda;
-    mpz_t micro;
+    // mpz_t lambda;
+    // mpz_t micro;
     
     mpz_init( n );
-    mpz_init( n2 );
+    // mpz_init( n2 );
     mpz_init( g );
-    mpz_init( lambda );
-    mpz_init( micro );
+    // mpz_init( lambda );
+    // mpz_init( micro );
 
     // Lendo as chaves publica e privadas dos arquivos
     arq = fopen("./keys/pubkey.txt","r");
@@ -32,12 +32,12 @@ int main(int argc, char **argv)
 
     fclose(arq);
 
-    arq = fopen("./keys/privkey.txt","r");
+    // arq = fopen("./keys/privkey.txt","r");
 
-    gmp_fscanf(arq,"%ZX\n",lambda);
-    gmp_fscanf(arq,"%ZX\n",micro);
+    // gmp_fscanf(arq,"%ZX\n",lambda);
+    // gmp_fscanf(arq,"%ZX\n",micro);
 
-    fclose(arq);
+    // fclose(arq);
     // publica : (n,g)
     // privada : (lambda, micro)
 
@@ -99,10 +99,10 @@ int main(int argc, char **argv)
 
 
     mpz_clear(n);
-    mpz_clear(n2);
+    // mpz_clear(n2);
     mpz_clear(g);
-    mpz_clear(lambda);
-    mpz_clear(micro);
+    // mpz_clear(lambda);
+    // mpz_clear(micro);
 
     fclose(arq);
 
