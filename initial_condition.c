@@ -4,115 +4,8 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
-
-
-void E( mpz_t c, mpz_t m, mpz_t g, mpz_t n ) {
-    mpz_t r;
-    mpz_t n2;
-    
-    mpz_init( r );
-    mpz_init( n2 );
-    
-    gmp_randstate_t rstate;
-    gmp_randinit_default(rstate);
-    gmp_randseed_ui(rstate, time(NULL) );
-    
-    mpz_mul( n2, n, n );
-    
-    mpz_urandomm( r, rstate, n );
-    mpz_powm( c, g, m, n2 );
-    mpz_powm( r, r, n, n2 );
-    mpz_mul( c, c, r );    
-    mpz_mod( c, c, n2 );     // c1 = (g^m1)(r^n) mod n^2
-}
-
-void D( mpz_t m, mpz_t c, mpz_t lambda, mpz_t micro, mpz_t n ) {
-    mpz_t r;
-    mpz_t n2;
-    mpz_t L;
-    
-    mpz_init( n2 );
-    mpz_init( L );
-    
-    mpz_mul( n2, n, n );
-    
-    mpz_powm( L, c, lambda, n2 );
-    mpz_sub_ui( L, L, 1 );
-    mpz_div( L, L, n );
-    
-    mpz_mul( m, L, micro );
-    mpz_mod( m, m, n );
-    
-}
-
-
-void init_vector(mpz_t **v, int n)
-{
-    (*v) = malloc(sizeof(mpz_t) * n);
-
-    // inicializando vetor
-    for(int i = 0; i < n; i++)
-    {
-        mpz_init((*v)[i]); 
-    }
-    
-}
-
-void print(mpz_t *v, int n)
-{
-    for(int i = 0; i < (n-1); i++)
-    {
-        printf("%f ",(1/1000000.0)*mpz_get_ui(v[i] ));
-    }
-    printf("%f\n",(1/1000000.0)*mpz_get_ui(v[(n-1)]));
-}
-
-
-void write_vector(mpz_t *v, int n, FILE *f,int op)
-{
-
-    switch (op)
-    {
-        case 0:
-            for(int i = 0; i < (n-1); i++)
-            {
-                fprintf (f, "%f\t",(1/1000000.0)*mpz_get_ui(v[i] ));
-            }
-            fprintf(f,"%f\n",(1/1000000.0)*mpz_get_ui(v[(n-1)]));  
-            break;
-        case 1:
-            for(int i = 0; i < (n-1); i++)
-            {
-                fprintf (f, "%ld\n",mpz_get_ui(v[i]));
-            }
-            fprintf(f,"%ld\n",mpz_get_ui(v[(n-1)]));
-            break;
-    
-    default:
-        break;
-    }
-    
-}
-
-
-void clear_vector(mpz_t *v, int n)
-{
-    for(int i = 0; i < n; i++)
-    {
-        mpz_clear(v[i]);
-    }
-    free(v);
-
-}
-
-void copy_vector(mpz_t *u, mpz_t *v, int n)
-{
-    for(int i = 0; i < n; i++)
-    {
-        mpz_set(u[i], v[i]);
-    }
-}
-
+#include "Pailler.h"
+#include "utils.h"
 
 int main(int argc, char **argv)
 {
@@ -166,6 +59,18 @@ int main(int argc, char **argv)
 
     // numero de Fourier 1/mul
     int mul = 5;
+
+    arq = fopen("./in/param.txt","r");
+    
+    fscanf(arq,"%d\n",&n_nodes);
+    fscanf(arq,"%d\n",&dx);
+    fscanf(arq,"%d\n",&dt);
+    fscanf(arq,"%d\n",&t_final);
+    fscanf(arq,"%d\n",&mul);
+
+    fclose(arq);
+
+
 
     mpz_t *Uant;
     Uant = malloc(sizeof(mpz_t) * n_nodes);
