@@ -1,1 +1,2 @@
+gcc -c initial_condition.c -lgmp -lm -o initial_condition.o && gcc -o initial_condition initial_condition.o utils.o Pailler.o -lgmp -lm
 gcc -c trabalho.c -o trabalho.o -lgmp -lm && gcc -c simulation.c -lgmp -lm -o simulation.o && gcc -o trabalho simulation.o trabalho.o utils.o Pailler.o -lgmp -lm
