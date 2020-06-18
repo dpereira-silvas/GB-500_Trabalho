@@ -45,15 +45,8 @@ double homomorphic_sc1()
     
     int dx;
     int dt;
-
-    // Exemplo 1
     int n_nodes;
-
-    // Exemplo 2
-    // int n_nodes = 7;
-
     int t_final;
-
     // numero de Fourier 1/mul
     int mul;
 
@@ -88,13 +81,6 @@ double homomorphic_sc1()
     }
     fclose(arq);
 
-    // for(int i = 0; i < n_nodes; i++)
-    // {   
-    //     D( U_dec[i], C[i], lambda, micro, n );
-
-    // }
-    // print(U_dec,n_nodes);
-    // return 0;
     arq = fopen("./out/out_sc1.txt","w");
 
     // Escrevendo no arquivo a condição inicial não criptografada
@@ -156,8 +142,6 @@ double homomorphic_sc1()
                     mpz_div(U_dec[i],U_dec[i],tmp1);
         }
         copy_vector(C,U,n_nodes);
-        // write_vector(U, n_nodes, arq);
-        // print(U_dec,n_nodes);
         write_vector(U_dec, n_nodes, arq,0);
         j = j + dt;
     }
@@ -214,26 +198,12 @@ double homomorphic_sc2() {
 
     fclose(arq);
     // publica : (n,g)
-    // privada : (lambda, micro)
-    // gmp_printf("%ZX\n",n);
-    // gmp_printf("%ZX\n",g);
-    // gmp_printf("%ZX\n",lambda);
-    // gmp_printf("%ZX\n",micro);
+    // privada : (lambda, micro)  
 
-    
-
-    
-    int dx = 5;
-    int dt = 5;
-
-    // Exemplo 1
+    int dx;
+    int dt;
     int n_nodes;
-
-    // Exemplo 2
-    // int n_nodes = 7;
-
     int t_final;
-
     // numero de Fourier 1/mul
     int mul;
 
@@ -269,14 +239,6 @@ double homomorphic_sc2() {
         gmp_fscanf(arq,"%ZX\n",C[i]);
     }
     fclose(arq);
-
-    // for(int i = 0; i < n_nodes; i++)
-    // {
-    //     D( U_dec[i], C[i], lambda, micro, n );
-
-    // }
-
-    // print(U_dec,n_nodes);
 
     arq = fopen("./out/out_sc2.txt","w");
 
@@ -367,15 +329,9 @@ double n_homomorphic() {
 
     FILE *arq;
     
-    int dx = 5;
-    int dt = 5;
-
-    // Exemplo 1
+    int dx;
+    int dt;
     int n_nodes;
-
-    // Exemplo 2
-    // int n_nodes = 7;
-
     int t_final;
 
     // numero de Fourier 1/mul

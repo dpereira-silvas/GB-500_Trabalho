@@ -9,11 +9,6 @@
 
 int main(int argc, char **argv)
 {
-    if(argc < 2)
-    {
-        printf("./initial_condition <n_nodes>\n");
-        return 0;
-    }
     FILE *arq;
 
     mpz_t n;
@@ -47,18 +42,11 @@ int main(int argc, char **argv)
     // privada : (lambda, micro)
 
 
-    int dx = 5;
-    int dt = 5;
-    // Exemplo 1
-    int n_nodes = atoi(argv[1]);
- 
-    // Exemplo 2
-    // int n_nodes = 7;
-
-    int t_final = 500;
-
-    // numero de Fourier 1/mul
-    int mul = 5;
+    int dx;
+    int dt;
+    int n_nodes;
+    int t_final;
+    int mul;
 
     arq = fopen("./in/param.txt","r");
     
@@ -76,7 +64,7 @@ int main(int argc, char **argv)
     Uant = malloc(sizeof(mpz_t) * n_nodes);
 
     // Condições de contorno
-    // Exemplo 1
+
     int cc;
     arq = fopen("./in/CC.txt","r");
     
@@ -88,36 +76,24 @@ int main(int argc, char **argv)
 
     fclose(arq);
 
-
-    
-    // Exemplo 2
-    // mpz_init_set_str(Uant[0],"20000000",10);
-    // mpz_init_set_str(Uant[n_nodes-1],"50000000",10);
-
-
-
     arq = fopen("./in/IC.txt","w");
 
     mpz_t tmp;
     mpz_init(tmp);
     E( tmp, Uant[0], g, n );
     gmp_fprintf (arq, "%ZX\n",tmp);
-    // gmp_fprintf (arq, "%ZX\n",Uant[0]);
+
     // Condição inicial
     for(int i = 1; i < (n_nodes-1); i++)
     {   
         //Exemplo 1
         mpz_init_set_str(Uant[i],"20000000",10); // 20.000000
-        // gmp_fprintf (arq, "%ZX\n",Uant[i]);
-        // Exemplo 2
-        // mpz_init_set_ui(Uant[i],(60-2*(i*dx))*1000000  ); // 60 -2*x
         E( tmp, Uant[i], g, n );
         gmp_fprintf (arq, "%ZX\n",tmp);
 
     }
     E( tmp, Uant[n_nodes-1], g, n );
     gmp_fprintf (arq, "%ZX\n",tmp);
-    // gmp_fprintf (arq, "%ZX\n",Uant[n_nodes-1]);
 
     clear_vector(Uant,n_nodes);
 
